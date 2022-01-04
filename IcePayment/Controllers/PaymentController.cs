@@ -2,6 +2,8 @@
 using IcePaymentAPI.Model.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using IcePayment.Dtos;
 
 namespace IcePayment.Controllers
 {
@@ -10,10 +12,12 @@ namespace IcePayment.Controllers
     public class PaymentController : Controller
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public PaymentController(DataContext context)
+        public PaymentController(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -32,8 +36,9 @@ namespace IcePayment.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Payment>>> AddPayment(Payment payment)
+        public async Task<ActionResult<List<Payment>>> AddPayment(PaymentDto paymentDto)
         {
+            var payment = _mapper.Map<Payment>(paymentDto);
             _context.Payments.Add(payment);
             await _context.SaveChangesAsync();
 

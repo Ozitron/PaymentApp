@@ -1,10 +1,10 @@
-using IcePayment.Data;
-using Microsoft.EntityFrameworkCore;
+global using IcePayment.Data;
+global using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddAutoMapper(typeof(IcePayment.Mapper.MapperConfig));
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(options =>
 {
