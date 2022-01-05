@@ -1,35 +1,31 @@
-﻿using IcePayment.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using IcePaymentAPI.Model.Entity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using IcePayment.Dtos;
+using IcePaymentAPI.Mapper;
+using IcePaymentAPI.Dtos;
 
-namespace IcePayment.Controllers
+namespace IcePaymentAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class PaymentController : Controller
     {
         private readonly DataContext _context;
-        private readonly IMapper _mapper;
 
-        public PaymentController(DataContext context, IMapper mapper)
+        public PaymentController(DataContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Payment>>> GetAll()
+        public async Task<ActionResult<List<Payment>>> GetAllPayments()
         {
-            return Ok(await _context.Payments.ToListAsync());
+            return Ok(await _context.Payments.Include(x => x.Order).ToListAsync());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Payment>> GetById(int id)
+        public async Task<ActionResult<Payment>> GetPaymentById(long id)
         {
-            var payment = await _context.Payments.FindAsync(id);
+            var payment = await _context.Payments.Include(x => x.Order).FirstAsync(x => x.Id == id);
             if (payment == null)
                 return BadRequest("Payment not found.");
             return Ok(payment);
@@ -38,11 +34,11 @@ namespace IcePayment.Controllers
         [HttpPost]
         public async Task<ActionResult<List<Payment>>> AddPayment(PaymentDto paymentDto)
         {
-            var payment = _mapper.Map<Payment>(paymentDto);
+            var payment = PaymentMapper.MapPayment(paymentDto);
             _context.Payments.Add(payment);
             await _context.SaveChangesAsync();
 
-            return Ok(await _context.Payments.ToListAsync());
+            return Ok(await _context.Payments.Include(x => x.Order).FirstAsync(x => x.Id == payment.Id));
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using IcePaymentAPI.Model.Entity;
-using Microsoft.EntityFrameworkCore;
 
-namespace IcePayment.Data
+namespace IcePaymentAPI.Data
 {
     public class DataContext : DbContext
     {
