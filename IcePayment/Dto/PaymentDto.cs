@@ -1,7 +1,7 @@
-﻿using IcePaymentAPI.Model.Common;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using IcePaymentAPI.Model.Common;
 
-namespace IcePaymentAPI.Dtos
+namespace IcePaymentAPI.Dto
 {
     public class PaymentDto
     {

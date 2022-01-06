@@ -7,10 +7,10 @@ namespace IcePaymentAPI.Model.Entity
     {
         [Required]
         [MaxLength(80)]
-        public string ConsumerFullName { get; set; }
+        public string ConsumerFullName { get; set; } = null!;
 
         [Required]
         [MaxLength(200)]
-        public string ConsumerAddress { get; set; }
+        public string ConsumerAddress { get; set; } = null!;
     }
 }

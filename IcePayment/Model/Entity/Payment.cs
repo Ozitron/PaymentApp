@@ -14,7 +14,7 @@ namespace IcePaymentAPI.Model.Entity
 
         [Required]
         [MaxLength(3)]
-        public string CurrencyCode { get; set; }
+        public string CurrencyCode { get; set; } 
 
         [Required]
         public PaymentStatus Status { get; set; }

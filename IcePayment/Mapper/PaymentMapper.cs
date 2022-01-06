@@ -1,4 +1,4 @@
-﻿using IcePaymentAPI.Dtos;
+﻿using IcePaymentAPI.Dto;
 using IcePaymentAPI.Model.Entity;
 
 namespace IcePaymentAPI.Mapper
@@ -15,7 +15,7 @@ namespace IcePaymentAPI.Mapper
                 Order = new Order()
                 {
                     ConsumerAddress = paymentDto.Order.ConsumerAddress,
-                    ConsumerFullName = paymentDto.Order.ConsumerAddress
+                    ConsumerFullName = paymentDto.Order.ConsumerFullName
                 },
                 CreationDate = DateTime.Now
             };

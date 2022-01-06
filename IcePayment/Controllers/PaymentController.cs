@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using IcePaymentAPI.Model.Entity;
 using IcePaymentAPI.Mapper;
-using IcePaymentAPI.Dtos;
+using IcePaymentAPI.Dto;
 
 namespace IcePaymentAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class PaymentController : Controller
     {
@@ -16,21 +15,22 @@ namespace IcePaymentAPI.Controllers
             _context = context;
         }
 
+        [Route("~/api/GetAllPayments")]
         [HttpGet]
         public async Task<ActionResult<List<Payment>>> GetAllPayments()
         {
             return Ok(await _context.Payments.Include(x => x.Order).ToListAsync());
         }
 
-        [HttpGet("{id}")]
+        [Route("~/api/GetPaymentById/{id}")]
+        [HttpGet("{id:long}")]
         public async Task<ActionResult<Payment>> GetPaymentById(long id)
         {
             var payment = await _context.Payments.Include(x => x.Order).FirstAsync(x => x.Id == id);
-            if (payment == null)
-                return BadRequest("Payment not found.");
             return Ok(payment);
         }
 
+        [Route("~/api/AddPayment")]
         [HttpPost]
         public async Task<ActionResult<List<Payment>>> AddPayment(PaymentDto paymentDto)
         {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IcePaymentAPI.Dtos
+namespace IcePaymentAPI.Dto
 {
     public class OrderDto
     {
