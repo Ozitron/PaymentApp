@@ -1,44 +1,39 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using IcePaymentAPI.Model.Entity;
-using IcePaymentAPI.Mapper;
+using IcePayment.API.Data;
 using IcePaymentAPI.Dto;
+using IcePaymentAPI.Model.Entity;
 
 namespace IcePaymentAPI.Controllers
 {
     [ApiController]
     public class PaymentController : Controller
     {
-        private readonly DataContext _context;
+        private readonly IPaymentRepository _paymentRepository;
 
-        public PaymentController(DataContext context)
+        public PaymentController(IPaymentRepository paymentRepository)
         {
-            _context = context;
+            _paymentRepository = paymentRepository;
         }
 
-        [Route("~/api/GetAllPayments")]
+        [Route("Payment/GetAll")]
         [HttpGet]
-        public async Task<ActionResult<List<Payment>>> GetAllPayments()
+        public async Task<List<Payment>> GetAllPayments()
         {
-            return Ok(await _context.Payments.Include(x => x.Order).ToListAsync());
+            return await _paymentRepository.GetAllPayments();
         }
 
-        [Route("~/api/GetPaymentById/{id}")]
+        [Route("Payment/GetById/{id}")]
         [HttpGet("{id:long}")]
-        public async Task<ActionResult<Payment>> GetPaymentById(long id)
+        public async Task<Payment> GetPaymentById(long id)
         {
-            var payment = await _context.Payments.Include(x => x.Order).FirstAsync(x => x.Id == id);
-            return Ok(payment);
+            return await _paymentRepository.GetPaymentById(id);
         }
 
-        [Route("~/api/AddPayment")]
+        [Route("Payment/Add")]
         [HttpPost]
-        public async Task<ActionResult<List<Payment>>> AddPayment(PaymentDto paymentDto)
+        public async Task<long> AddPayment(PaymentDto paymentDto)
         {
-            var payment = PaymentMapper.MapPayment(paymentDto);
-            _context.Payments.Add(payment);
-            await _context.SaveChangesAsync();
-
-            return Ok(await _context.Payments.Include(x => x.Order).FirstAsync(x => x.Id == payment.Id));
+            return await _paymentRepository.AddPayment(paymentDto);
         }
     }
 }
