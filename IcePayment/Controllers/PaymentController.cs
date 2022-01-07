@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using IcePayment.API.Data;
 using IcePaymentAPI.Dto;
-using IcePaymentAPI.Model.Entity;
 
 namespace IcePaymentAPI.Controllers
 {
@@ -17,23 +15,26 @@ namespace IcePaymentAPI.Controllers
 
         [Route("Payment/GetAll")]
         [HttpGet]
-        public async Task<List<Payment>> GetAllPayments()
+        public async Task<IActionResult> GetAllPayments()
         {
-            return await _paymentRepository.GetAllPayments();
+            return Ok(await _paymentRepository.GetAllPayments());
         }
 
         [Route("Payment/GetById/{id}")]
         [HttpGet("{id:long}")]
-        public async Task<Payment> GetPaymentById(long id)
+        public async Task<IActionResult> GetPaymentById(long id)
         {
-            return await _paymentRepository.GetPaymentById(id);
+            return Ok(await _paymentRepository.GetPaymentById(id));
         }
 
         [Route("Payment/Add")]
         [HttpPost]
-        public async Task<long> AddPayment(PaymentDto paymentDto)
+        public async Task<IActionResult> AddPayment(PaymentDto paymentDto)
         {
-            return await _paymentRepository.AddPayment(paymentDto);
+            var id = await _paymentRepository.AddPayment(paymentDto);
+            if (id > 0)
+                return Ok(id);
+            return BadRequest();
         }
     }
 }
