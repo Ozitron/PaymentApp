@@ -16,7 +16,7 @@ Or in Visual Studio, IcePayment.API solution can be started directly
 There are three endpoints:\
 ~/Payment/Add : Creates a payment\
 ~/Payment/GetAll : Gets all payments\
-~/Payment/GetById/{Id} : Return selected payment object for given payment Id\
+~/Payment/GetById/{Id} : Return selected payment object for given payment Id
 
 ## How to use API methods
 IcePayment_Api_Collection.json file can import to Postman\
