@@ -11,7 +11,7 @@ Or in Visual Studio, IcePayment.API solution can be started directly
 
 ## About the Application
 -> In-memory database used in this application\
--> xUnit used for unit testing\
+-> xUnit used for unit testing
 
 There are three endpoints:\
 ~/Payment/Add : Creates a payment\
