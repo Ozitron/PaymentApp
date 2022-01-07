@@ -4,17 +4,18 @@ This project is a technical assignment that is created for IcePay. The project i
 ## How to run
 Open api project (\IcePayment) and run: 
 
->_ docker-compose up 
+> docker-compose up 
 
 Or on Visual Studio, IcePayment.API solution can be started directly
 ![SS1](https://user-images.githubusercontent.com/9204813/148570589-92263ad9-60b3-402f-8e34-347c7a31fe62.JPG)
 
 ## About the Application
--> In-memory database used in this application
--> There are three endpoints:
-   ~/Payment/Add : Creates a payment
-   ~/Payment/GetAll : Gets all payments
-   ~/Payment/GetById/{Id} : Return selected payment object for given payment Id
+In-memory database used in this application
+
+There are three endpoints:
+\n\t ~/Payment/Add : Creates a payment
+\n\t ~/Payment/GetAll : Gets all payments
+\n\t ~/Payment/GetById/{Id} : Return selected payment object for given payment Id
 
 ## How to use API methods
 IcePayment_Api_Collection.json file can import to Postman
