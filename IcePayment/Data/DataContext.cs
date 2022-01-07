@@ -9,6 +9,5 @@ namespace IcePaymentAPI.Data
         }
 
         public DbSet<Payment> Payments { get; set; } = null!;
-        public DbSet<Order> Orders { get; set; } = null!;
     }
 }
