@@ -12,10 +12,10 @@ Or on Visual Studio, IcePayment.API solution can be started directly
 ## About the Application
 In-memory database used in this application
 
-There are three endpoints:
-\n\t ~/Payment/Add : Creates a payment
-\n\t ~/Payment/GetAll : Gets all payments
-\n\t ~/Payment/GetById/{Id} : Return selected payment object for given payment Id
+There are three endpoints:\
+~/Payment/Add : Creates a payment\
+~/Payment/GetAll : Gets all payments\
+~/Payment/GetById/{Id} : Return selected payment object for given payment Id\
 
 ## How to use API methods
 IcePayment_Api_Collection.json file can import to Postman
