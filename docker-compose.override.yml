@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+  icepayment.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "UseInMemoryDatabase=true"
+    ports:      
+      - "5001:80"

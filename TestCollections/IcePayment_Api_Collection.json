@@ -23,8 +23,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:5001/Payment/Add",
-							"protocol": "https",
+							"raw": "http://localhost:5001/Payment/Add",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -43,8 +43,8 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:5001/Payment/GetAll",
-							"protocol": "https",
+							"raw": "http://localhost:5001/Payment/GetAll",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -63,8 +63,8 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:5001/Payment/GetById/1",
-							"protocol": "https",
+							"raw": "http://localhost:5001/Payment/GetById/1",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],

@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IcePayment.API", "IcePayment\IcePayment.API.csproj", "{520823BB-1DBB-4469-A0BC-9E53B201AC24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IcePayment.Test", "IcePayment.Test\IcePayment.Test.csproj", "{D971C2FC-B9E8-4FFE-87CC-639C97545F2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IcePayment.Test", "IcePayment.Test\IcePayment.Test.csproj", "{D971C2FC-B9E8-4FFE-87CC-639C97545F2D}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{55BA6402-B10B-4FB6-948F-92D9332220DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D971C2FC-B9E8-4FFE-87CC-639C97545F2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D971C2FC-B9E8-4FFE-87CC-639C97545F2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D971C2FC-B9E8-4FFE-87CC-639C97545F2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55BA6402-B10B-4FB6-948F-92D9332220DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55BA6402-B10B-4FB6-948F-92D9332220DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55BA6402-B10B-4FB6-948F-92D9332220DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55BA6402-B10B-4FB6-948F-92D9332220DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

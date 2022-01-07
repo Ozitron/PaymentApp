@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  icepayment.api:
+    image: ${DOCKER_REGISTRY-}icepaymentapi
+    build:
+      context: .
+      dockerfile: IcePayment\Dockerfile
