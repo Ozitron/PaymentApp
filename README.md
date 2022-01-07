@@ -2,7 +2,7 @@
 This project is a technical assignment that is created for IcePay. The project is a .Net Core Web API application and it is developed using C# .Net 6.0
 
 ## How to run
-Open api project (\IcePayment) and run: 
+With using Docker, open api project (\IcePayment) and run: 
 
 > docker-compose up 
 
