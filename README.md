@@ -18,8 +18,8 @@ There are three endpoints:\
 ~/Payment/GetAll : Gets all payments\
 ~/Payment/GetById/{Id} : Return selected payment object for given payment Id
 
-## How to use API methods
-IcePayment_Api_Collection.json file can import to Postman\
+## How to test API methods
+To test API methods easily, IcePayment_Api_Collection.json file can be imported into Postman 
 
 ![ss2](https://user-images.githubusercontent.com/9204813/148570817-c3f8fd75-f782-4edc-8732-50e535028c8f.JPG)
    
