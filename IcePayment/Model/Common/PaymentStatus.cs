@@ -1,4 +1,4 @@
-﻿namespace IcePaymentAPI.Model.Common
+﻿namespace IcePayment.API.Model.Common
 {
     public enum PaymentStatus
     {

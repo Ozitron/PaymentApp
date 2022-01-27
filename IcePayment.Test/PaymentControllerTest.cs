@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using IcePayment.API.Data;
-using IcePaymentAPI.Controllers;
-using IcePaymentAPI.Dto;
-using IcePaymentAPI.Model.Common;
-using IcePaymentAPI.Model.Entity;
+using IcePayment.API.Controllers;
+using IcePayment.API.Data.Repositories;
+using IcePayment.API.Model.Common;
+using IcePayment.API.Model.Entity;
+using IcePayment.Test.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
@@ -30,10 +30,10 @@ namespace IcePayment.Test
         {
             //Arrange
             var payment = GetSamplePaymentList().First(x => x.Id == Id);
-            _paymentRepository.Setup(x => x.GetPaymentById(Id)).ReturnsAsync(payment);
+            _paymentRepository.Setup(x => x.Get(Id)).ReturnsAsync(payment);
 
             //Act
-            var result = await _paymentController.GetPaymentById(Id);
+            var result = await _paymentController.Get(Id);
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
@@ -49,10 +49,10 @@ namespace IcePayment.Test
         public async void GetPaymentById_InvalidPayment_PaymentNotFound(int Id)
         {
             //Arrange
-            _paymentRepository.Setup(x => x.GetAllPayments()).ReturnsAsync(GetSamplePaymentList());
+            _paymentRepository.Setup(x => x.GetAll()).ReturnsAsync(GetSamplePaymentList());
 
             //Act
-            IActionResult actionResult = await _paymentController.GetPaymentById(Id);
+            IActionResult actionResult = await _paymentController.Get(Id);
 
             //Assert
             var okResult = actionResult as OkObjectResult;
@@ -68,10 +68,10 @@ namespace IcePayment.Test
         {
             //Arrange
             var paymentList = GetSamplePaymentList();
-            _paymentRepository.Setup(x => x.GetAllPayments()).ReturnsAsync(paymentList);
+            _paymentRepository.Setup(x => x.GetAll()).ReturnsAsync(paymentList);
 
             //Act
-            IActionResult actionResult = await _paymentController.GetAllPayments();
+            IActionResult actionResult = await _paymentController.Get();
 
             //Assert
             var okResult = actionResult as OkObjectResult;
@@ -86,11 +86,11 @@ namespace IcePayment.Test
         public async void AddPayment_ValidPaymentDto_ReturnSuccess()
         {
             //Arrange
-            var paymentDto = CreateValidPaymentDto();
-            _paymentRepository.Setup(x => x.AddPayment(paymentDto)).ReturnsAsync(1);
+            var paymentDto = CommonTestHelper.CreateValidPaymentDto();
+            _paymentRepository.Setup(x => x.Create(paymentDto)).ReturnsAsync(1);
 
             //Act
-            var actionResult = await _paymentController.AddPayment(paymentDto);
+            var actionResult = await _paymentController.Create(paymentDto);
 
             //Assert
             var okResult = actionResult as OkObjectResult;
@@ -105,11 +105,11 @@ namespace IcePayment.Test
         public async void AddPayment_InvalidPaymentAmount_ReturnsBadRequest()
         {
             //Arrange
-            var paymentDto = CreateValidPaymentDto();
+            var paymentDto = CommonTestHelper.CreateValidPaymentDto();
             paymentDto.Amount *= -1;
 
             //Act
-            var actionResult = await _paymentController.AddPayment(paymentDto);
+            var actionResult = await _paymentController.Create(paymentDto);
 
             //Assert
             Assert.IsType<BadRequestResult>(actionResult);
@@ -119,27 +119,24 @@ namespace IcePayment.Test
         public async void AddPayment_InvalidPaymentCurrencyCode_ReturnsBadRequest()
         {
             //Arrange
-            var paymentDto = CreateValidPaymentDto();
+            var paymentDto = CommonTestHelper.CreateValidPaymentDto();
             paymentDto.CurrencyCode += "X";
 
             //Act
-            var actionResult = await _paymentController.AddPayment(paymentDto);
+            var actionResult = await _paymentController.Create(paymentDto);
 
             //Assert
             Assert.IsType<BadRequestResult>(actionResult);
         }
 
-        [Theory]
-        [InlineData(-1)]
-        [InlineData(5)]
-        public async void AddPayment_InvalidPaymentStatus_ReturnsBadRequest(int status)
+        [Fact]
+        public async void AddPayment_IsValidPaymentStatus_ReturnsSuccess()
         {
             //Arrange
-            var paymentDto = CreateValidPaymentDto();
-            paymentDto.Status = (PaymentStatus)status;
+            var paymentDto = CommonTestHelper.CreateValidPaymentDto();
 
             //Act
-            var actionResult = await _paymentController.AddPayment(paymentDto);
+            var actionResult = await _paymentController.Create(paymentDto);
 
             //Assert
             Assert.IsType<BadRequestResult>(actionResult);
@@ -149,25 +146,25 @@ namespace IcePayment.Test
         public async void AddPayment_InvalidOrderConsumerFullNameTooShort_ReturnsBadRequest()
         {
             //Arrange
-            var paymentDto = CreateValidPaymentDto();
+            var paymentDto = CommonTestHelper.CreateValidPaymentDto();
             paymentDto.Order.ConsumerFullName = string.Empty;
 
             //Act
-            var actionResult = await _paymentController.AddPayment(paymentDto);
+            var actionResult = await _paymentController.Create(paymentDto);
 
             //Assert
             Assert.IsType<BadRequestResult>(actionResult);
         }
 
         [Fact]
-        public async void AddPayment_InvalidOrderConsumerFullNameTooLong_ReturnsBadRequest()
+        public async void Create_InvalidOrderConsumerFullNameTooLong_ReturnsBadRequest()
         {
             //Arrange
-            var paymentDto = CreateValidPaymentDto();
-            paymentDto.Order.ConsumerFullName = CreateLongString(81);
+            var paymentDto = CommonTestHelper.CreateValidPaymentDto();
+            paymentDto.Order.ConsumerFullName = CommonTestHelper.CreateLongString(81);
 
             //Act
-            var actionResult = await _paymentController.AddPayment(paymentDto);
+            var actionResult = await _paymentController.Create(paymentDto);
 
             //Assert
             Assert.IsType<BadRequestResult>(actionResult);
@@ -177,11 +174,11 @@ namespace IcePayment.Test
         public async void AddPayment_InvalidOrderConsumerConsumerAddressTooShort_ReturnsBadRequest()
         {
             //Arrange
-            var paymentDto = CreateValidPaymentDto();
+            var paymentDto = CommonTestHelper.CreateValidPaymentDto();
             paymentDto.Order.ConsumerAddress = string.Empty;
 
             //Act
-            var actionResult = await _paymentController.AddPayment(paymentDto);
+            var actionResult = await _paymentController.Create(paymentDto);
 
             //Assert
             Assert.IsType<BadRequestResult>(actionResult);
@@ -191,11 +188,11 @@ namespace IcePayment.Test
         public async void AddPayment_InvalidOrderConsumerConsumerAddressTooLong_ReturnsBadRequest()
         {
             //Arrange
-            var paymentDto = CreateValidPaymentDto();
-            paymentDto.Order.ConsumerAddress = CreateLongString(201);
+            var paymentDto = CommonTestHelper.CreateValidPaymentDto();
+            paymentDto.Order.ConsumerAddress = CommonTestHelper.CreateLongString(201);
 
             //Act
-            var actionResult = await _paymentController.AddPayment(paymentDto);
+            var actionResult = await _paymentController.Create(paymentDto);
 
             //Assert
             Assert.IsType<BadRequestResult>(actionResult);
@@ -236,18 +233,5 @@ namespace IcePayment.Test
             };
             return payments;
         }
-
-        private static PaymentDto CreateValidPaymentDto()
-        {
-            return new PaymentDto()
-            {
-                Amount = 100.123M,
-                CurrencyCode = "USD",
-                Order = new OrderDto() { ConsumerAddress = "Beijing, China", ConsumerFullName = "Wei Long" },
-                Status = PaymentStatus.Created
-            };
-        }
-
-        private static string CreateLongString(int stringLength) => new string('*', stringLength);
     }
 }

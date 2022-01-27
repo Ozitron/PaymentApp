@@ -1,6 +1,6 @@
 global using Microsoft.EntityFrameworkCore;
-global using IcePaymentAPI.Data;
 global using IcePayment.API.Data;
+using IcePayment.API.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

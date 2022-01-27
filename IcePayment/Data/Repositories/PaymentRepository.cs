@@ -1,8 +1,8 @@
-﻿using IcePaymentAPI.Dto;
-using IcePaymentAPI.Mapper;
-using IcePaymentAPI.Model.Entity;
+﻿using IcePayment.API.Dto;
+using IcePayment.API.Mapper;
+using IcePayment.API.Model.Entity;
 
-namespace IcePayment.API.Data
+namespace IcePayment.API.Data.Repositories
 {
     public class PaymentRepository : IPaymentRepository
     {
@@ -13,7 +13,7 @@ namespace IcePayment.API.Data
             _context = context;
         }
 
-        public async Task<long> AddPayment(PaymentDto paymentDto)
+        public async Task<long> Create(PaymentDto paymentDto)
         {
             var payment = PaymentMapper.MapPayment(paymentDto);
             _context.Payments.Add(payment);
@@ -21,12 +21,12 @@ namespace IcePayment.API.Data
             return payment.Id;
         }
 
-        public async Task<Payment> GetPaymentById(long id)
+        public async Task<Payment> Get(long id)
         {
             return await _context.Payments.Include(x => x.Order).FirstAsync(x => x.Id == id);
         }
 
-        public async Task<List<Payment>> GetAllPayments()
+        public async Task<List<Payment>> GetAll()
         {
             return await _context.Payments.Include(x => x.Order).ToListAsync();
         }

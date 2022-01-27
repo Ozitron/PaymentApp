@@ -1,7 +1,8 @@
-﻿using IcePaymentAPI.Dto;
-using IcePaymentAPI.Model.Entity;
+﻿using IcePayment.API.Dto;
+using IcePayment.API.Model.Common;
+using IcePayment.API.Model.Entity;
 
-namespace IcePaymentAPI.Mapper
+namespace IcePayment.API.Mapper
 {
     public static class PaymentMapper
     {
@@ -11,8 +12,8 @@ namespace IcePaymentAPI.Mapper
             {
                 Amount = paymentDto.Amount,
                 CurrencyCode = paymentDto.CurrencyCode,
-                Status = paymentDto.Status,
-                Order = new Order()
+                Status = PaymentStatus.Created,
+                Order = new Order
                 {
                     ConsumerAddress = paymentDto.Order.ConsumerAddress,
                     ConsumerFullName = paymentDto.Order.ConsumerFullName

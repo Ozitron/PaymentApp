@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using IcePaymentAPI.Dto;
+using IcePayment.API.Dto;
+using IcePayment.API.Data.Repositories;
 
-namespace IcePaymentAPI.Controllers
+namespace IcePayment.API.Controllers
 {
     [ApiController]
-    public class PaymentController : Controller
+    [Route("api/[controller]/[action]")]
+    public class PaymentController : ControllerBase
     {
         private readonly IPaymentRepository _paymentRepository;
 
@@ -13,25 +15,22 @@ namespace IcePaymentAPI.Controllers
             _paymentRepository = paymentRepository;
         }
 
-        [Route("Payment/GetAll")]
         [HttpGet]
-        public async Task<IActionResult> GetAllPayments()
+        public async Task<IActionResult> Get()
         {
-            return Ok(await _paymentRepository.GetAllPayments());
+            return Ok(await _paymentRepository.GetAll());
         }
 
-        [Route("Payment/GetById/{id}")]
         [HttpGet("{id:long}")]
-        public async Task<IActionResult> GetPaymentById(long id)
+        public async Task<IActionResult> Get(long id)
         {
-            return Ok(await _paymentRepository.GetPaymentById(id));
+            return Ok(await _paymentRepository.Get(id));
         }
 
-        [Route("Payment/Add")]
         [HttpPost]
-        public async Task<IActionResult> AddPayment(PaymentDto paymentDto)
+        public async Task<IActionResult> Create(PaymentDto paymentDto)
         {
-            var id = await _paymentRepository.AddPayment(paymentDto);
+            var id = await _paymentRepository.Create(paymentDto);
             if (id > 0)
                 return Ok(id);
             return BadRequest();

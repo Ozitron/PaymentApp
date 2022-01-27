@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IcePaymentAPI.Model.Entity.Base
+namespace IcePayment.API.Model.Entity.Base
 {
     public class EntityBase
     {

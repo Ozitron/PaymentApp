@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using IcePaymentAPI.Model.Entity.Base;
-using IcePaymentAPI.Model.Common;
+using IcePayment.API.Model.Common;
+using IcePayment.API.Model.Entity.Base;
 
-namespace IcePaymentAPI.Model.Entity
+namespace IcePayment.API.Model.Entity
 {
     public class Payment : EntityBase
     {
@@ -13,7 +13,7 @@ namespace IcePaymentAPI.Model.Entity
         public decimal Amount { get; set; }
 
         [Required]
-        [MaxLength(3)]
+        [StringLength(3)]
         public string CurrencyCode { get; set; } 
 
         [Required]

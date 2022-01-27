@@ -1,6 +1,6 @@
-﻿using IcePaymentAPI.Model.Entity;
+﻿using IcePayment.API.Model.Entity;
 
-namespace IcePaymentAPI.Data
+namespace IcePayment.API.Data
 {
     public class DataContext : DbContext
     {

@@ -1,7 +1,7 @@
-﻿using IcePaymentAPI.Model.Entity.Base;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using IcePayment.API.Model.Entity.Base;
 
-namespace IcePaymentAPI.Model.Entity
+namespace IcePayment.API.Model.Entity
 {
     public class Order : EntityBase
     {

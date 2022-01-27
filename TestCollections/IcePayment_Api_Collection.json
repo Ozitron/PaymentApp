@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0185e9bd-b5d3-486e-8467-18fe0fef57ce",
+		"_postman_id": "539e8e70-d1aa-4675-919c-a20b64758cf8",
 		"name": "IcePayment API Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,13 +9,16 @@
 			"name": "Payment",
 			"item": [
 				{
-					"name": "Add",
+					"name": "Get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"Amount\" : 1,\r\n\t\"CurrencyCode\" : \"USD\", \r\n\t\"Order\" :\r\n\t{\r\n\t\t\"ConsumerAddress\" : \"Beijing, China\", \r\n\t\t\"ConsumerFullName\" : \"Wei Long\"\r\n\t},\r\n\t\"Status\" : 1\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -23,15 +26,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5001/Payment/Add",
-							"protocol": "http",
+							"raw": "https://localhost:5001/api/payment/get/1",
+							"protocol": "https",
 							"host": [
 								"localhost"
 							],
 							"port": "5001",
 							"path": [
-								"Payment",
-								"Add"
+								"api",
+								"payment",
+								"get",
+								"1"
 							]
 						}
 					},
@@ -39,40 +44,62 @@
 				},
 				{
 					"name": "GetAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:5001/Payment/GetAll",
-							"protocol": "http",
+							"raw": "https://localhost:5001/api/payment/get",
+							"protocol": "https",
 							"host": [
 								"localhost"
 							],
 							"port": "5001",
 							"path": [
-								"Payment",
-								"GetAll"
+								"api",
+								"payment",
+								"get"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GetById",
+					"name": "Create",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"Amount\" : 200,\r\n\t\"CurrencyCode\" : \"USD\", \r\n\t\"Order\" :\r\n\t{\r\n\t\t\"ConsumerAddress\" : \"Beijing, China\", \r\n\t\t\"ConsumerFullName\" : \"Wei Long\"\r\n\t},\r\n\t\"Status\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:5001/Payment/GetById/1",
-							"protocol": "http",
+							"raw": "https://localhost:5001/api/payment/create",
+							"protocol": "https",
 							"host": [
 								"localhost"
 							],
 							"port": "5001",
 							"path": [
-								"Payment",
-								"GetById",
-								"1"
+								"api",
+								"payment",
+								"create"
 							]
 						}
 					},
