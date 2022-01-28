@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using IcePayment.API.Helper;
+using IcePayment.API.Helpers;
 
 namespace IcePayment.API.Dto
 {

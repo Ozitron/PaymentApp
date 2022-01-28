@@ -23,7 +23,7 @@ namespace IcePayment.API.Data.Repositories
 
         public async Task<Payment> Get(long id)
         {
-            return await _context.Payments.Include(x => x.Order).FirstAsync(x => x.Id == id);
+            return await _context.Payments.Include(x => x.Order).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<List<Payment>> GetAll()

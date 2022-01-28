@@ -5,7 +5,7 @@ using IcePayment.API.Data.Repositories;
 namespace IcePayment.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/payments")]
     public class PaymentController : ControllerBase
     {
         private readonly IPaymentRepository _paymentRepository;
@@ -24,16 +24,23 @@ namespace IcePayment.API.Controllers
         [HttpGet("{id:long}")]
         public async Task<IActionResult> Get(long id)
         {
-            return Ok(await _paymentRepository.Get(id));
+            if (id <= 0)
+            {
+                return BadRequest("Invalid payment id.");
+            }
+
+            var payment = await _paymentRepository.Get(id);
+            if (payment == null)
+                return NotFound();
+
+            return Ok(payment);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(PaymentDto paymentDto)
         {
-            var id = await _paymentRepository.Create(paymentDto);
-            if (id > 0)
-                return Ok(id);
-            return BadRequest();
+            var paymentId = await _paymentRepository.Create(paymentDto);
+            return Ok(new { message = $"Payment {paymentId} successfully created" });
         }
     }
 }

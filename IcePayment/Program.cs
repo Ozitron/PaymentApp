@@ -1,6 +1,7 @@
 global using Microsoft.EntityFrameworkCore;
 global using IcePayment.API.Data;
 using IcePayment.API.Data.Repositories;
+using IcePayment.API.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,8 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.MapControllers();
 

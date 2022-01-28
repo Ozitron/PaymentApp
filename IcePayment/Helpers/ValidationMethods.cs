@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IcePayment.API.Helper
+namespace IcePayment.API.Helpers
 {
     public class ValidationMethods
     {
