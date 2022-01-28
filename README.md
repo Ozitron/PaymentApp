@@ -8,9 +8,9 @@ The project is a .Net Core Web API application and it is developed using C# .Net
 
 
 There are three endpoints:\
-[HttpGet]  /Payments : Gets all payments\
-[HttpGet]  /payment/{id} : Return selected payment object for given payment Id\
-[HttpPost] /payments : Creates a payment
+[HttpGet]  **/payments** : Gets all payments\
+[HttpGet]  **/payments/{id}** : Return selected payment object for given payment Id\
+[HttpPost] **/payments** : Creates a payment
 
 
 ## How to run
