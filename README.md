@@ -25,5 +25,6 @@ There are three endpoints:\
 ## How to test API methods
 To test API methods quickly, IcePayment_Api_Collection.json file can be imported into Postman 
 
-![ss2](https://user-images.githubusercontent.com/9204813/148570817-c3f8fd75-f782-4edc-8732-50e535028c8f.JPG)
+![image](https://user-images.githubusercontent.com/9204813/151472808-5d9ab97c-6e6b-4022-a765-2e69f255f026.png)
+
    
