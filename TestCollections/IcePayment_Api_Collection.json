@@ -26,7 +26,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:5001/api/payment/get/1",
+							"raw": "https://localhost:5001/api/payments/1",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -34,8 +34,7 @@
 							"port": "5001",
 							"path": [
 								"api",
-								"payment",
-								"get",
+								"payments",
 								"1"
 							]
 						}
@@ -52,7 +51,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"1\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -60,7 +59,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:5001/api/payment/get",
+							"raw": "https://localhost:5001/api/payments",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -68,8 +67,7 @@
 							"port": "5001",
 							"path": [
 								"api",
-								"payment",
-								"get"
+								"payments"
 							]
 						}
 					},
@@ -82,7 +80,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"Amount\" : 200,\r\n\t\"CurrencyCode\" : \"USD\", \r\n\t\"Order\" :\r\n\t{\r\n\t\t\"ConsumerAddress\" : \"Beijing, China\", \r\n\t\t\"ConsumerFullName\" : \"Wei Long\"\r\n\t},\r\n\t\"Status\" : 1\r\n}",
+							"raw": "{\r\n\t\"Amount\" : 100,\r\n\t\"CurrencyCode\" : \"USD\", \r\n\t\"Order\" :\r\n\t{\r\n\t\t\"ConsumerAddress\" : \"Beijing, China\", \r\n\t\t\"ConsumerFullName\" : \"Wei Long\"\r\n\t},\r\n\t\"Status\" : 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -90,7 +88,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:5001/api/payment/create",
+							"raw": "https://localhost:5001/api/payments",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -98,8 +96,7 @@
 							"port": "5001",
 							"path": [
 								"api",
-								"payment",
-								"create"
+								"payments"
 							]
 						}
 					},
