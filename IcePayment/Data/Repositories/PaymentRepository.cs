@@ -1,4 +1,5 @@
 ﻿using IcePayment.API.Dto;
+using IcePayment.API.Helpers;
 using IcePayment.API.Mapper;
 using IcePayment.API.Model.Entity;
 
@@ -13,12 +14,19 @@ namespace IcePayment.API.Data.Repositories
             _context = context;
         }
 
-        public async Task<long> Create(PaymentDto paymentDto)
+        public async Task<long> Create(PaymentCreateDto paymentDto)
         {
-            var payment = PaymentMapper.MapPayment(paymentDto);
-            _context.Payments.Add(payment);
-            await _context.SaveChangesAsync();
-            return payment.Id;
+            try
+            {
+                var payment = PaymentMapper.MapPaymentCreateDtoToPayment(paymentDto);
+                _context.Payments.Add(payment);
+                await _context.SaveChangesAsync();
+                return payment.Id;
+            }
+            catch
+            {
+                throw new AppException();
+            }
         }
 
         public async Task<Payment> Get(long id)

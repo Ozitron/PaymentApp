@@ -5,10 +5,10 @@ using IcePayment.API.Model.Entity;
 namespace IcePayment.API.Mapper
 {
     public static class PaymentMapper
-    {
-        public static Payment MapPayment(PaymentDto paymentDto)
+    { 
+        public static Payment MapPaymentCreateDtoToPayment(PaymentCreateDto paymentDto)
         {
-            var payment = new Payment()
+            var payment = new Payment
             {
                 Amount = paymentDto.Amount,
                 CurrencyCode = paymentDto.CurrencyCode,

@@ -5,7 +5,7 @@ namespace IcePayment.API.Data.Repositories
 {
     public interface IPaymentRepository
     {
-        Task<long> Create(PaymentDto paymentDto);
+        Task<long> Create(PaymentCreateDto paymentDto);
         Task<Payment> Get(long id);
         Task<List<Payment>> GetAll();
     }

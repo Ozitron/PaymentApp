@@ -2,10 +2,16 @@ global using Microsoft.EntityFrameworkCore;
 global using IcePayment.API.Data;
 using IcePayment.API.Data.Repositories;
 using IcePayment.API.Helpers;
+using IcePayment.API.Validators;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(fv =>
+{
+    fv.RegisterValidatorsFromAssemblyContaining<PaymentValidator>();
+});
+
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseInMemoryDatabase("PaymentDB");
@@ -25,3 +31,6 @@ app.UseMiddleware<ErrorHandlerMiddleware>();
 app.MapControllers();
 
 app.Run();
+
+// for integration tests
+public partial class Program { }

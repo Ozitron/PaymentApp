@@ -37,8 +37,13 @@ namespace IcePayment.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(PaymentDto paymentDto)
+        public async Task<IActionResult> Post([FromBody] PaymentCreateDto paymentDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var paymentId = await _paymentRepository.Create(paymentDto);
             return Ok(new { message = $"Payment {paymentId} successfully created" });
         }
