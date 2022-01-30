@@ -37,7 +37,7 @@ namespace IcePayment.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] PaymentCreateDto paymentDto)
+        public async Task<IActionResult> Post(PaymentCreateDto paymentDto)
         {
             if (!ModelState.IsValid)
             {
