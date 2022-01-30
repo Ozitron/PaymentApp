@@ -71,6 +71,19 @@ namespace IcePayment.Test.IntegrationTests
         }
 
         [Fact]
+        public async Task Get_WithInvalidPaymentId_ReturnsBadRequest()
+        {
+            // Arrange
+            var route = Route + "/-1";
+
+            // Act
+            var responseGet = await _client.GetAsync(route); ;
+
+            // Assert
+            Assert.Equal(HttpStatusCode.BadRequest, responseGet.StatusCode);
+        }
+
+        [Fact]
         public async Task GetAll_WhenSucceeds_ReturnsAllPayments()
         {
             // Arrange
