@@ -1,4 +1,4 @@
-# IcePayment Payment API
+# Payment API
 The project is a .Net Core Web API application and it is developed using C# .Net 6.0
 
 
